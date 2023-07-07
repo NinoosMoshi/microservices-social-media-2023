@@ -5,3 +5,30 @@ spring:
   application:
     name: user-management
 
+# ===============================
+# = SPRING DATABASE
+# ===============================
+datasource:
+  driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  databaseUrl: jdbc:sqlserver://localhost;DatabaseName=ff_user_management;characterEncoding=UTF-8;encrypt=false
+  databaseUser: root
+  databasePassword: nahonaho86
+  platform: org.hibernate.dialect.SQLServer2012Dialect
+
+
+# ===============================
+# = JPA / HIBERNATE
+# ===============================
+jpa:
+  showSql: true
+  hibernate:
+    generate-ddl: true
+    hibernateDDLAuto: create
+    hibernateDialect: org.hibernate.dialect.SQLServer2012Dialect
+
+
+
+
+
+
+
