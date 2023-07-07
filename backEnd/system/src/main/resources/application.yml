@@ -1,0 +1,9 @@
+#spring.application.name=system-service
+#server.port=8085
+
+server:
+  port: 8085
+
+spring:
+  application:
+    name: system-service

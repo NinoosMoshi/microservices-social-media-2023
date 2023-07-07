@@ -1,0 +1,27 @@
+
+server:
+  port: 8081
+
+spring:
+  application:
+     name: friend-finder-service
+  datasource:
+     url: jdbc:mysql://localhost:3306/friend-finder-db?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+     username: root
+     password: nahonaho86
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+#server.port=8081
+#spring.application.name=friend-finder-service
+#spring.datasource.url=jdbc:mysql://localhost:3306/friend-finder-db?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+#spring.datasource.username=root
+#spring.datasource.password=nahonaho86
+#spring.jpa.show-sql=true
+#spring.jpa.hibernate.ddl-auto=update
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
