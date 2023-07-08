@@ -1,5 +1,10 @@
 package com.ninos.config;
 
+import liquibase.integration.spring.SpringLiquibase;
+
+import javax.sql.DataSource;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -8,9 +13,6 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import javax.sql.DataSource;
-import java.util.HashMap;
 
 @Configuration
 public class HibernateConfig {
@@ -36,21 +38,20 @@ public class HibernateConfig {
     @Value("${jpa.showSql}")
     private String showSql;
 
+    @Value("${jpa.hibernate.create_empty_composites.enabled}")
+    private boolean createEmptyComposites;
 
     @Bean(name = "platformDataSource")
-    public DataSource platformDataSource(){
-        return DataSourceBuilder.create()
-                .username(databaseUser)
-                .password(databasePassword)
-                .url(databaseUrl)
-                .driverClassName(driverClassName)
-                .build();
+    public DataSource platformDataSource() {
+        return DataSourceBuilder.create().username(databaseUser)
+                        .password(databasePassword).url(databaseUrl)
+                        .driverClassName(driverClassName).build();
     }
-
 
     @Bean("entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean platformEntityManger() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean em =
+                        new LocalContainerEntityManagerFactoryBean();
 
         em.setDataSource(platformDataSource());
         em.setPackagesToScan(new String[] { "com.ninos" });
@@ -62,7 +63,8 @@ public class HibernateConfig {
         properties.put("hibernate.hbm2ddl.auto", hibernateDDLAuto);
         properties.put("hibernate.dialect", hibernateDialect);
         properties.put("hibernate.show_sql", showSql);
-
+        properties.put("jpa.hibernate.create_empty_composites.enabled",
+                        createEmptyComposites);
 
         em.setJpaPropertyMap(properties);
 
@@ -76,6 +78,12 @@ public class HibernateConfig {
         return transactionManager;
     }
 
-
+    @Bean
+    public SpringLiquibase liquibase() {
+        SpringLiquibase springLiquibase = new SpringLiquibase();
+        springLiquibase.setChangeLog("classpath:db/master.xml");
+        springLiquibase.setDataSource(platformDataSource());
+        return springLiquibase;
+    }
 
 }
