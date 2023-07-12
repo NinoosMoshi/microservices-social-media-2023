@@ -4,11 +4,19 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ninos.model.BaseEntity;
 import com.ninos.model.enumeration.Language;
+import com.ninos.model.role.Role;
+import com.ninos.model.userrole.UserRole;
 
 
 @EqualsAndHashCode(callSuper = false)
@@ -37,5 +45,8 @@ public class User extends BaseEntity {
     @Column(name = "language")
     @Enumerated(EnumType.STRING)
     private Language language;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    private List<UserRole> roles = new ArrayList<>();
 
 }
