@@ -5,10 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import com.ninos.model.BaseEntity;
 import com.ninos.model.enumeration.Language;
 
+
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 public class User extends BaseEntity {
