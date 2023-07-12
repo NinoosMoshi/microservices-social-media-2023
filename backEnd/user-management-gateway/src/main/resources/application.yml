@@ -1,31 +1,32 @@
-server:
-  port: 9095
 
 spring:
   application:
-    name: user-management
+    name: ${SPRING.APP.NAME:user-management}
+
+server:
+  port: ${SERVER.PORT:9095}
 
 # ===============================
 # = SPRING DATABASE
 # ===============================
 datasource:
-  driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-  databaseUrl: jdbc:sqlserver://localhost;DatabaseName=friend_finder;characterEncoding=UTF-8;encrypt=false
-  databaseUser: ninos
-  databasePassword: nahonaho86
-  platform: org.hibernate.dialect.SQLServer2012Dialect
+  driverClassName: ${DATASOURCE.DRIVER.NAME:com.microsoft.sqlserver.jdbc.SQLServerDriver}
+  databaseUrl: ${DATASOURCE.URL:jdbc:sqlserver://localhost;DatabaseName=friend_finder;characterEncoding=UTF-8;encrypt=false}
+  databaseUser: ${DATASOURCE.USER.NAME:ninos}
+  databasePassword: ${DATASOURCE.USER.PASSWORD:nahonaho86}
+  platform: ${DATASOURCE.PLATFORM:org.hibernate.dialect.SQLServer2012Dialect}
 
 
 # ===============================
 # = JPA / HIBERNATE
 # ===============================
 jpa:
-  showSql: true
+  showSql: ${JPA.SHOW_SQL:true}
   hibernate:
-    hibernateDDLAuto: none
-    hibernateDialect: org.hibernate.dialect.SQLServer2012Dialect
+    hibernateDDLAuto: ${JPA.HIBERNATE.DDL:none}
+    hibernateDialect: ${JPA.HIBERNATE.DIALECT:org.hibernate.dialect.SQLServer2012Dialect}
     create_empty_composites:
-      enabled: true
+      enabled: ${JPA.HIBERNATE.COMPOSITES:true}
 
 
 
