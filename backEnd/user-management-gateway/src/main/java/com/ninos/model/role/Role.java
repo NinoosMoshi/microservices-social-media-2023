@@ -1,5 +1,6 @@
 package com.ninos.model.role;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
@@ -17,7 +18,10 @@ import com.ninos.model.userrole.UserRole;
 @Entity
 public class Role extends BaseEntity {
 
-   private String code;            // admin
+   @Column(name = "code")
+   private String code;// admin
+
+   @Column(name = "display_name")
    private String displayName;     // Admin
 
 

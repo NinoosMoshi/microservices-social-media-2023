@@ -9,5 +9,6 @@ CREATE TABLE user_sys(
     email varchar(255),
     phone varchar(255),
     admin bit not null DEFAULT 0,
-    language VARCHAR(10) NOT NULL CHECK (language IN('ENGLISH', 'ARABIC'))
+    language VARCHAR(10) NOT NULL CHECK (language IN('ENGLISH', 'ARABIC')),
+    primary key (id)
 )
