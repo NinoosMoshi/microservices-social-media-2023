@@ -6,6 +6,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,6 +21,7 @@ import com.ninos.model.userrole.UserRole;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
+@Table(name = "user_sys")
 public class User extends BaseEntity {
 
     @Column(name = "name")
