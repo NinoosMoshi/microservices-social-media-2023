@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import com.ninos.model.BaseEntity;
 import com.ninos.model.enumeration.Language;
-import com.ninos.model.role.Role;
 import com.ninos.model.userrole.UserRole;
 
 
