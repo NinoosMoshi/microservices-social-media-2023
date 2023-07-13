@@ -17,7 +17,7 @@ public class Organization extends BaseEntity {
     @Column(name = "reference_id")
     private String referenceId;
 
-    @Column(name = "organizatin_name")
+    @Column(name = "organization_name")
     private String organizationName;
 
     @Column(name = "password")
