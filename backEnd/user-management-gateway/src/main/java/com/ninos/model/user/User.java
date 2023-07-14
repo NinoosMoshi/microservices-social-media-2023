@@ -15,6 +15,7 @@ import java.util.List;
 
 import com.ninos.model.BaseEntity;
 import com.ninos.model.enumeration.Language;
+import com.ninos.model.enumeration.Scope;
 import com.ninos.model.userrole.UserRole;
 
 
@@ -45,6 +46,9 @@ public class User extends BaseEntity {
     @Column(name = "language")
     @Enumerated(EnumType.STRING)
     private Language language;
+
+    @Column(name = "scope")
+    private Scope scope;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
     private List<UserRole> roles = new ArrayList<>();
