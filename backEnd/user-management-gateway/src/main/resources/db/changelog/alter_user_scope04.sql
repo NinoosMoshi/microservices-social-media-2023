@@ -1,0 +1,1 @@
+ALTER TABLE user_sys ADD scope VARCHAR(10) NOT NULL CHECK ( scope iN('USER','ORGANIZATION') );

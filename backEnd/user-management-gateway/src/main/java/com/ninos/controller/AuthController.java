@@ -28,10 +28,6 @@ public class AuthController {
 
 
 
-    @PostMapping("/register")
-    public ResponseEntity<UserAuthDTO> register(@RequestBody Map<String, Objects> params){
-        return null;
-    }
 
 
     @PostMapping("/token")

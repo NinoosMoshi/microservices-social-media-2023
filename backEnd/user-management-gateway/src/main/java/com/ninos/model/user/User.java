@@ -48,6 +48,7 @@ public class User extends BaseEntity {
     private Language language;
 
     @Column(name = "scope")
+    @Enumerated(EnumType.STRING)
     private Scope scope;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "users")

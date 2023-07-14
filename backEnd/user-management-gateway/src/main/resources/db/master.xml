@@ -8,6 +8,7 @@
     <include file="classpath:db/changelog/create_role01.sql" />
     <include file="classpath:db/changelog/create_organization02.sql" />
     <include file="classpath:db/changelog/create_user_role03.sql" />
+    <include file="classpath:db/changelog/alter_user_scope04.sql" />
 
 
 </databaseChangeLog>
