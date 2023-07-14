@@ -2,6 +2,10 @@
 spring:
   application:
     name: ${SPRING.APP.NAME:user-management}
+  security:
+    user:
+      name: ninos
+      password: 111
 
 server:
   port: ${SERVER.PORT:9095}
@@ -27,7 +31,6 @@ jpa:
     hibernateDialect: ${JPA.HIBERNATE.DIALECT:org.hibernate.dialect.SQLServer2012Dialect}
     create_empty_composites:
       enabled: ${JPA.HIBERNATE.COMPOSITES:true}
-
 
 
 
