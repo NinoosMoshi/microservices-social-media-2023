@@ -10,5 +10,6 @@ CREATE TABLE user_sys(
     phone varchar(255),
     admin bit not null DEFAULT 0,
     language VARCHAR(10) NOT NULL CHECK (language IN('ENGLISH', 'ARABIC')),
+    scope VARCHAR(20) NOT NULL CHECK ( scope IN('USER','ORGANIZATION') ),
     primary key (id)
 )

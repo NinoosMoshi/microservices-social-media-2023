@@ -1,4 +1,4 @@
-package com.ninos.model.userrole;
+package com.ninos.organizationrole;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -10,22 +10,23 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+import com.ninos.model.organization.Organization;
 import com.ninos.model.role.CompositeKey;
 import com.ninos.model.role.Role;
 import com.ninos.model.user.User;
 
 @Data
 @Entity
-@Table(name = "user_role")
-public class UserRole implements Serializable {
+@Table(name = "organization_role")
+public class OrganizationRole implements Serializable {
 
     @EmbeddedId
     private CompositeKey compositeKey;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "organization_id")
     @MapsId("integrationId")
-    private User users;
+    private Organization organizations;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
