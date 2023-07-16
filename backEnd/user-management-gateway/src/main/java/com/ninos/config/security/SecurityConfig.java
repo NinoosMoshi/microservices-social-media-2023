@@ -25,7 +25,7 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig {
 
 
-    private static final String[] PUBLIC_URLS = {"/api/home/**"};
+    private static final String[] PUBLIC_URLS = {"/test/about/**"};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -40,16 +40,10 @@ public class SecurityConfig {
 
 
 
-
-
-
-
-
-
-//    @Bean
-//    public static PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public static PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
 
 
