@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,6 +17,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.ninos.organizationrole.OrganizationRole;
 import com.ninos.repository.OrganizationRepository;
 
 
@@ -37,17 +39,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         Optional<Organization> organization = organizationRepository.findByReferenceId(referenceId);
         if (organization.isPresent()){
            if (passwordEncoder.matches(password, organization.get().getPassword())){
-               List<GrantedAuthority> authorityList = new ArrayList<>();
-               authorityList.add(new SimpleGrantedAuthority("organization_user"));
+//               List<SimpleGrantedAuthority> organizationRoles = organization.get().getRoles().stream().map(role ->{
+//                   return new SimpleGrantedAuthority(role.getRoles().getCode());
+//               }).collect(Collectors.toList());
 
-               return new UsernamePasswordAuthenticationToken(referenceId, password, authorityList);
-           }else{
-               throw new BadCredentialsException("Invalid Password");
+               return new UsernamePasswordAuthenticationToken(referenceId, password, toSimpleGrantedAuthority(organization.get().getRoles()));
            }
         }
-        else{
-            throw new BadCredentialsException("Invalid User, you must be register");
-        }
+        return null;
 
     }
 
@@ -58,4 +57,19 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
+
+
+
+      private List<SimpleGrantedAuthority> toSimpleGrantedAuthority(List<OrganizationRole> organizationRoles){
+          List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
+
+          for (OrganizationRole organizationRole: organizationRoles){
+              simpleGrantedAuthorities.add( new SimpleGrantedAuthority(organizationRole.getRoles().getCode()) );
+          }
+          return simpleGrantedAuthorities;
+      }
+
+
+
+
 }
