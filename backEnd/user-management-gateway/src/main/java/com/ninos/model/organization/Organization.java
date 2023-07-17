@@ -40,7 +40,7 @@ public class Organization extends BaseEntity {
 
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "organizations")
-    private List<OrganizationRole> roles = new ArrayList<>();
+    private List<OrganizationRole> roles;
 
 
 

@@ -3,6 +3,7 @@ package com.ninos.model.organization;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,11 +40,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         Optional<Organization> organization = organizationRepository.findByReferenceId(referenceId);
         if (organization.isPresent()){
            if (passwordEncoder.matches(password, organization.get().getPassword())){
-//               List<SimpleGrantedAuthority> organizationRoles = organization.get().getRoles().stream().map(role ->{
-//                   return new SimpleGrantedAuthority(role.getRoles().getCode());
-//               }).collect(Collectors.toList());
+               List<SimpleGrantedAuthority> simpleGrantedAuthorities =
+                       ( organization.get().getRoles() != null )  ?
+                               organization.get().getRoles().stream()
+                                       .map(role -> new SimpleGrantedAuthority(role.getRoles().getCode()))
+                                       .collect(Collectors.toList())
+                               :Collections.emptyList();
 
-               return new UsernamePasswordAuthenticationToken(referenceId, password, toSimpleGrantedAuthority(organization.get().getRoles()));
+               return new UsernamePasswordAuthenticationToken(referenceId, password, simpleGrantedAuthorities);
            }
         }
         return null;
@@ -57,18 +61,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
-
-
-
-      private List<SimpleGrantedAuthority> toSimpleGrantedAuthority(List<OrganizationRole> organizationRoles){
-          List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
-
-          for (OrganizationRole organizationRole: organizationRoles){
-              simpleGrantedAuthorities.add( new SimpleGrantedAuthority(organizationRole.getRoles().getCode()) );
-          }
-          return simpleGrantedAuthorities;
-      }
-
 
 
 
